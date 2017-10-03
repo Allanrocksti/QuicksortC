@@ -21,6 +21,9 @@ typedef enum{
 	false = 0,
 }boolean;
 
+/*
+	Função que retorna a quantidade de alunos que existe dentro do arquivo
+*/
 int qtd_alunos(){
  
  	FILE *arq;
@@ -33,7 +36,7 @@ int qtd_alunos(){
 
 	if(arq != NULL){
 
-		while(1){
+		while(true){
 		
 			result = fgets(string_temp, 100, arq);
 			
@@ -53,19 +56,18 @@ int qtd_alunos(){
 }
 
 /*
-Função que insere os dados do arquivo dentro do array de alunos
-	
-	@Aluno alunos[]: array de Aluno
-	@int qtd_alunos: quantidade de alunos
+	Função que insere os dados do arquivo dentro do array de alunos
+		
+		@Aluno alunos[]: array de Aluno
+		@int qtd_alunos: quantidade de alunos
 
-	@return: boolean indicando se houve erro na abertura do arquivo
-				true: Abriu corretamente
-				false: Erro ao abrir
-
+		@return: boolean indicando se houve erro na abertura do arquivo
+					true: Abriu corretamente
+					false: Erro ao abrir
 */
 boolean coletar_alunos(Aluno alunos[], int qtd_alunos){
 	
-	boolean erro = true;
+	boolean erro = false;
 
 	FILE *arq;
 	char linha[100];
@@ -87,7 +89,7 @@ boolean coletar_alunos(Aluno alunos[], int qtd_alunos){
 		fclose(arq);
 
 	}else{
-		erro = false;
+		erro = true;
 	}
 
 	return erro;
@@ -155,7 +157,7 @@ int main(){
 
 		Aluno alunos[qtd];
 		
-		if(coletar_alunos(alunos, qtd) == true){
+		if(coletar_alunos(alunos, qtd) == false){
 
 			quicksort(alunos, 0, qtd-1);
 			print_alunos(alunos, qtd);
